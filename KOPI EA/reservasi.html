@@ -86,7 +86,7 @@
     <!-- End Rules Section -->
 
     <!-- Start Reservation Section -->
-    <section id="Reservation" class="py-5" style="background-color: #f4f1ea">
+    <section id="Reservation" class="container my-5" style="background-color: #f4f1ea">
       <center>
         <h2 class="text-brown">Form Reservasi</h2>
       </center>
@@ -94,34 +94,51 @@
       <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">
           <div class="bg-white shadow-lg rounded p-4">
-            <form>
-              <div class="form-group">
-                <label for="namaLengkap">Nama Lengkap</label>
-                <input type="text" class="form-control" id="namaLengkap" placeholder="Masukkan Nama Lengkap" />
+            <form name="reservasi">
+              <div class="mb-3">
+                <label for="name" class="form-label">Nama Lengkap</label>
+                <input type="text" class="form-control" id="name" aria-describedby="name" name="nama" />
               </div>
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Masukkan Email" />
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" aria-describedby="email" name="email" />
               </div>
-              <div class="form-group">
-                <label for="jumlah">Jumlah Orang</label>
-                <input type="number" class="form-control" id="jumlah" placeholder="Masukkan Jumlah Orang" />
+              <div class="mb-3">
+                <label for="jumlah" class="form-label">Jumlah Orang</label>
+                <input type="number" class="form-control" id="jumlah" aria-describedby="jumlah" name="jumlah" />
               </div>
-              <div class="form-group">
-                <label for="waktu">Waktu Reservasi</label>
-                <input type="datetime-local" class="form-control" id="waktu" />
+              <div class="mb-3">
+                <label for="waktu" class="form-label">Waktu Reservasi</label>
+                <input type="datetime-local" class="form-control" id="waktu" aria-describedby="waktu" name="waktu" />
               </div>
-              <div class="form-group">
-                <label for="pesanan">Pesanan</label>
-                <textarea class="form-control" id="pesanan" rows="4" placeholder="Masukkan Pesanan"></textarea>
+              <div class="mb-3">
+                <label for="pesanan" class="form-label">Pesanan</label>
+                <textarea class="form-control" id="pesanan" rows="4" aria-describedby="pesanan" name="pesanan"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary w-100">Kirim</button>
+              <button type="submit" class="btn btn-primary">Kirim</button>
             </form>
           </div>
         </div>
       </div>
     </section>
     <!-- End Reservation Section -->
+
+    <form name="reservasi">
+      <input name="nama" type="text" placeholder="Nama" required />
+      <button type="submit">Kirim</button>
+    </form>
+
+    <script>
+      const scriptURL = "https://script.google.com/macros/s/AKfycbzm8VVALu-yh7vbdBfSVritTGmY7vMosj6X8lrVNVJrd7RrF2Foq06eyGG71dS80zPYOQ/exec";
+      const form = document.forms["reservasi"];
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) => console.log("Success!", response))
+          .catch((error) => console.error("Error!", error.message));
+      });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
